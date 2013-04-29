@@ -32,6 +32,35 @@ void CalcularNecesidad(int A[10][10],int B[10][10], int C[10][10], int procesos,
   }
 
 
+int NecesidadCubierta(int C[10][10], int N , int procesos, int Disponibles[10]){
+    
+int i = 0;
+int j = 0;
+int cont = 0;
+
+ while(cont < N){
+           
+  for(j = 0 ; j < N ; j++){
+        
+        if(C[i][j] <= Disponibles[j]){
+            cont++;
+            }
+        }         
+           
+    if(cont == N){
+        return i;    
+      }
+    else if(i == procesos){
+          return 11;        
+         } 
+      
+    cont = 0;
+    i++;     
+}    
+    
+return i;    
+    
+}
 
 main(){
        int A[10][10];
@@ -102,5 +131,8 @@ main(){
                                Disponibles[i]=Recursos[i]-SumaA[i];
                                cout<<"\t"<<"R["<<i<<"]: "<<Disponibles[i];
                                }
+                               
+       cout << NecesidadCubierta(C,N,procesos,Disponibles);
+                               
        system("PAUSE");
 }
