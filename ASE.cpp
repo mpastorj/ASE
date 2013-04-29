@@ -37,15 +37,24 @@ int NecesidadCubierta(int C[10][10], int N , int procesos, int Disponibles[10]){
 int i = 0;
 int j = 0;
 int cont = 0;
+int cont2 = 10;
 
  while(cont < N){
            
   for(j = 0 ; j < N ; j++){
         
+        if(C[i][j] == 0){
+          cont2++;        
+           }
         if(C[i][j] <= Disponibles[j]){
             cont++;
             }
-        }         
+        } 
+        
+     if(cont2 == N+10){
+       cont = 0; 
+       cont2 = 10;      
+     }            
            
     if(cont == N){
         return i;    
@@ -58,8 +67,33 @@ int cont = 0;
     i++;     
 }    
     
-return i;    
     
+    
+}
+
+void AsignaNecesidades(int A[10][10], int B[10][10] , int C[10][10] , int i , int N, int Disponibles[10]){
+ 
+int j = 0;
+     
+  for(j = 0 ; j < N ; j++){
+    A[i][j] = B[i][j];
+    Disponibles[j] = Disponibles[j] - C[i][j];
+    C[i][j] = 0;    
+        
+        
+        }     
+}
+
+
+     
+void DevolverRecursos(int A[10][10], int i , int N, int Disponibles[10]){     
+
+int j ;
+     
+ for(j=0;j<N;j++){
+                               Disponibles[j] += A[i][j];
+                               cout<<"\t"<<"R["<<j<<"]: "<<Disponibles[j];
+                               }     
 }
 
 main(){
@@ -75,6 +109,7 @@ main(){
        int i=0;
        int j=0;
        int maximo=0;
+       int indice = 0;
        
        cout<<"Ingrese Cantidad de Procesos: ";
        cin>>procesos;
@@ -104,9 +139,8 @@ main(){
                                          suma=0;
                                          
                         }
-       
-       cout<<endl<<endl<<"Matriz: ASIGNADOS"<<endl<<endl;
-       imprimir(A,N,procesos);
+                        
+
        cout<<endl<<"2) ** RECURSOS MAXIMOS **"<<endl<<endl;
        for(i=0;i<procesos;i++){
                         for(j=0;j<N;j++){
@@ -121,18 +155,46 @@ main(){
                                               }
                                          }
                         }
-       cout<<endl<<endl<<"Matriz: MAXIMOS"<<endl<<endl;
-       imprimir(B,N,procesos);
        
-       CalcularNecesidad(A,B,C,procesos,N);
-       imprimir(C,N,procesos);
        cout<<endl<<endl<<"-> RECURSOS DISPONIBLES: "<<endl;
        for(i=0;i<N;i++){
                                Disponibles[i]=Recursos[i]-SumaA[i];
                                cout<<"\t"<<"R["<<i<<"]: "<<Disponibles[i];
                                }
-                               
-       cout << NecesidadCubierta(C,N,procesos,Disponibles);
-                               
+      
+       CalcularNecesidad(A,B,C,procesos,N);
+                           
+        indice = NecesidadCubierta(C,N,procesos,Disponibles);
+       
+      if(indice != 11)
+        {
+        while(indice != 11)
+        {        
+       cout<<endl<<endl<<"Matriz: ASIGNADOS"<<endl<<endl;
+       imprimir(A,N,procesos);    
+                         
+       cout<<endl<<endl<<"Matriz: MAXIMOS"<<endl<<endl;
+       imprimir(B,N,procesos);
+       
+       cout<<endl<<endl<<"Matriz: NECESIDAD"<<endl<<endl;
+       imprimir(C,N,procesos);
+
+       
+       indice = NecesidadCubierta(C,N,procesos,Disponibles);
+       
+       
+
+       
+       AsignaNecesidades(A,B,C,indice,N,Disponibles);
+       
+       
+
+
+       
+       DevolverRecursos(A,indice,N,Disponibles);
+       }
+       }
+        
+                       
        system("PAUSE");
 }
