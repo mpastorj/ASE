@@ -39,6 +39,7 @@ main(){
        int C[10][10];
        int Recursos[10];
        int SumaA[10];
+       int Disponibles[10];
        int suma=0;
        int N=0;
        int procesos=0;
@@ -96,9 +97,10 @@ main(){
        
        CalcularNecesidad(A,B,C,procesos,N);
        imprimir(C,N,procesos);
-       cout<<endl<<endl<<"-> RECURSOS DISPONIBLES: ";
+       cout<<endl<<endl<<"-> RECURSOS DISPONIBLES: "<<endl;
        for(i=0;i<N;i++){
-                               cout<<"\t"<<"R["<<i<<"]: "<<SumaA[i];
+                               Disponibles[i]=Recursos[i]-SumaA[i];
+                               cout<<"\t"<<"R["<<i<<"]: "<<Disponibles[i];
                                }
        system("PAUSE");
 }
