@@ -116,6 +116,8 @@ main(){
        int j=0;
        int maximo=0;
        int indice = 0;
+       int contador=0;
+       int veces=0;
        
        cout<<"Ingrese Cantidad de Procesos: ";
        cin>>procesos;
@@ -170,11 +172,9 @@ main(){
       
        CalcularNecesidad(A,B,C,procesos,N);
                            
-        indice = NecesidadCubierta(C,N,procesos,Disponibles);
-      int contador=0;
+       indice = NecesidadCubierta(C,N,procesos,Disponibles);
+        
       
-      if(indice != 11)
-        {
         while(indice != 11 && indice != 12)
         {       
        cout<<endl<<endl<<"Matriz: ASIGNADOS"<<endl<<endl;
@@ -192,15 +192,15 @@ main(){
        
        DevolverRecursos(A,B,indice,N,Disponibles);
        contador++;
-       if(contador<=procesos){
+       if(contador<=procesos && indice!=11 && indice!=12){
                              cout<<endl<<"-------------------------------------"<<endl;
                              cout<<endl<<"Se ha seleccionado P["<<indice<<"]"<<endl;
+                             veces++;
                              }
+       if((indice==11 || indice==12) && veces!=procesos){
+                     cout << endl << "****** MEMORIA INSUFICIENTE ********"; 
+                     }
        }
-       }
-      else{
-        cout << endl << "Memoria Insuficiente"; 
-        }
        
        cout<<endl<<endl<<endl;           
        system("PAUSE");
