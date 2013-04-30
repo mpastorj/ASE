@@ -27,7 +27,7 @@ void CalcularNecesidad(int A[10][10],int B[10][10], int C[10][10], int procesos,
                              
                         }
      
-    cout<<endl<<endl<<"Matriz: NECESIDAD"<<endl<<endl;
+   
          
   }
 
@@ -59,10 +59,13 @@ int cont2 = 10;
     if(cont == N){
         return i;    
       }
-    else if(i == procesos){
+    else if(i == procesos && cont2 ==10){
           return 11;        
          } 
-      
+    else if(i == procesos){  
+          return 12;   
+          }
+          
     cont = 0;
     i++;     
 }    
@@ -86,13 +89,16 @@ int j = 0;
 
 
      
-void DevolverRecursos(int A[10][10], int i , int N, int Disponibles[10]){     
+void DevolverRecursos(int A[10][10], int B[10][10], int i , int N, int Disponibles[10]){     
 
 int j ;
      
- for(j=0;j<N;j++){
+ for(j=0;j<N;j++){             
+
                                Disponibles[j] += A[i][j];
                                cout<<"\t"<<"R["<<j<<"]: "<<Disponibles[j];
+                               A[i][j] = 0;
+                               B[i][j] = 0;
                                }     
 }
 
@@ -168,7 +174,7 @@ main(){
        
       if(indice != 11)
         {
-        while(indice != 11)
+        while(indice != 11 && indice != 12)
         {        
        cout<<endl<<endl<<"Matriz: ASIGNADOS"<<endl<<endl;
        imprimir(A,N,procesos);    
@@ -191,10 +197,12 @@ main(){
 
 
        
-       DevolverRecursos(A,indice,N,Disponibles);
+       DevolverRecursos(A,B,indice,N,Disponibles);
        }
        }
-        
+      else{
+        cout << endl << "Memoria Insuficiente"; 
+        }
                        
        system("PAUSE");
 }
