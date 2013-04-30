@@ -1,5 +1,13 @@
+/*Trabajo realizado por:
+- Marilyn Pastor Jaque
+- Pedro Cuevas Meza
+- Camilo Martínez Parraguez
+para la asignatura de Sistemas Operativos*/
+
+
 #include <stdio.h>
 #include <iostream>
+
 
 using namespace std;
 
@@ -111,19 +119,45 @@ main(){
        int Disponibles[10];
        int suma=0;
        int N=0;
+       int R=0;
        int procesos=0;
+       int p=0;
        int i=0;
        int j=0;
        int maximo=0;
        int indice = 0;
        int contador=0;
        int veces=0;
+       int estado=0;
        
-       cout<<"Ingrese Cantidad de Procesos: ";
-       cin>>procesos;
-       
-       cout<<"Ingrese Numero de Recursos: ";
-       cin>>N;
+       cout<<endl<<"       ALGORITMO DE SEGURIDAD DE ESTADO      "<<endl<<endl;
+       cout<<"* Este algoritmo no permite mas de 10 procesos"<<endl<<endl;
+       cout<<"* Este algoritmo no permite mas de 4 recursos"<<endl<<endl;
+       cout<<"-> Ingrese Cantidad de Procesos: ";
+       cin>>p;
+       if(p>10){
+                while(p>10){
+                       cout<<"Solo le puede ingresar un maximo de 10 procesos!, vuelva a ingresar: ";
+                       cin>>p;
+                       }
+                       procesos=p;
+                       }
+       else{
+            procesos=p;
+            }
+            
+       cout<<"-> Ingrese Numero de Recursos: ";
+       cin>>R;
+       if(R>4){
+                while(R>4){
+                       cout<<"Solo le puede ingresar un maximo de 4 recursos!, vuelva a ingresar: ";
+                       cin>>R;
+                       }
+                       N=R;
+                       }
+       else{
+            N=R;
+            }
        
        for(i=0;i<N;i++){
                         cout<<"Ingrese Instancias Totales de R["<<i<<"]:";
@@ -196,11 +230,19 @@ main(){
                              cout<<endl<<"-------------------------------------"<<endl;
                              cout<<endl<<"Se ha seleccionado P["<<indice<<"]"<<endl;
                              veces++;
+                             estado=1;
                              }
        if((indice==11 || indice==12) && veces!=procesos){
                      cout << endl << "****** MEMORIA INSUFICIENTE ********"; 
+                     estado=0;
                      }
        }
+       
+       if(estado==1){
+                     cout<<endl<<endl<<"-> El Sistema se encuentra en estado SEGURO"<<endl<<endl;
+                     }
+       else
+           cout<<endl<<endl<<"-> El estado del Sistema es INSEGURO"<<endl<<endl;
        
        cout<<endl<<endl<<endl;           
        system("PAUSE");
