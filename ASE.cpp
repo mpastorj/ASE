@@ -171,11 +171,12 @@ main(){
        CalcularNecesidad(A,B,C,procesos,N);
                            
         indice = NecesidadCubierta(C,N,procesos,Disponibles);
-       
+      int contador=0;
+      
       if(indice != 11)
         {
         while(indice != 11 && indice != 12)
-        {        
+        {       
        cout<<endl<<endl<<"Matriz: ASIGNADOS"<<endl<<endl;
        imprimir(A,N,procesos);    
                          
@@ -184,25 +185,23 @@ main(){
        
        cout<<endl<<endl<<"Matriz: NECESIDAD"<<endl<<endl;
        imprimir(C,N,procesos);
-
        
        indice = NecesidadCubierta(C,N,procesos,Disponibles);
        
-       
-
-       
        AsignaNecesidades(A,B,C,indice,N,Disponibles);
        
-       
-
-
-       
        DevolverRecursos(A,B,indice,N,Disponibles);
+       contador++;
+       if(contador<=procesos){
+                             cout<<endl<<"-------------------------------------"<<endl;
+                             cout<<endl<<"Se ha seleccionado P["<<indice<<"]"<<endl;
+                             }
        }
        }
       else{
         cout << endl << "Memoria Insuficiente"; 
         }
-                       
+       
+       cout<<endl<<endl<<endl;           
        system("PAUSE");
 }
