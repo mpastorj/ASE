@@ -110,7 +110,7 @@ int j ;
                                }     
 }
 
-main(){
+int main(){
        int A[10][10];
        int B[10][10];
        int C[10][10];
@@ -129,10 +129,12 @@ main(){
        int contador=0;
        int veces=0;
        int estado=0;
+       int instancia=0;
        
        cout<<endl<<"       ALGORITMO DE SEGURIDAD DE ESTADO      "<<endl<<endl;
        cout<<"* Este algoritmo no permite mas de 10 procesos"<<endl<<endl;
        cout<<"* Este algoritmo no permite mas de 4 recursos"<<endl<<endl;
+       cout<<"* Este algoritmo permite un maximo de 10 instancias de cada recurso"<<endl<<endl;
        cout<<"-> Ingrese Cantidad de Procesos: ";
        cin>>p;
        if(p>10){
@@ -161,7 +163,15 @@ main(){
        
        for(i=0;i<N;i++){
                         cout<<"Ingrese Instancias Totales de R["<<i<<"]:";
-                        cin>>Recursos[i];
+                        cin>>instancia;
+                        if(instancia>10){
+                                         cout<<"Solo se permite un maximo de 10 instancias"<<endl;
+                                         i=i-1;
+                                         }
+                        else{
+                             Recursos[i]=instancia;
+                             }
+                        
                         }
        
        cout<<endl<<endl<<"------ Ahora se llenaran las matrices ------"<<endl;
@@ -244,6 +254,8 @@ main(){
        else
            cout<<endl<<endl<<"-> El estado del Sistema es INSEGURO"<<endl<<endl;
        
-       cout<<endl<<endl<<endl;           
+       cout<<endl<<endl<<endl; 
+                
        system("PAUSE");
+       return 0; 
 }
